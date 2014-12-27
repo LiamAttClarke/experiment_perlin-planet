@@ -3,13 +3,26 @@ using System.Collections;
 
 namespace Universe {
 	public class PlanetGenerator : MonoBehaviour {
-		public float scale = 0.5f;
-		public float amplitude = 12.0f;
-		int terrainSeed;
-		int atmosphereSeed;
+
+		Mesh planetMesh;
+		Vector3[] terrainVerts;
+		PerlinNoise terrainNoise, atmosphereNoise;
+		int terrainSeed, atmosphereSeed;
+		double vert_x, vert_y, vert_z;
+		GameObject cloudPrefab;
+		GameObject cloud;
+		float terrainMap, cloudMap;
+		float terrainSpread = 0.5f;
+		float cloudSpread = 0.25f;
+		float amplitude = 12.0f;
 		float rotateSpeed = 1.0f;
+		public bool isRotating = false;
+
 		// Use this for initialization
 		void Start () {
+			planetMesh = gameObject.GetComponent<MeshFilter> ().mesh;
+			terrainVerts = planetMesh.vertices;
+			cloudPrefab = (GameObject)Resources.Load ("Prefabs/Cloud");
 			atmosphereSeed = Random.Range (0, 100);
 			terrainSeed = Random.Range (0, 100);
 			GeneratePlanetMesh ();
@@ -17,45 +30,51 @@ namespace Universe {
 		
 		// Update is called once per frame
 		void Update () {
+			isRotating = false;
 			if (Input.GetKey (KeyCode.LeftArrow)) {
 				transform.Rotate (new Vector3 (0, 0, rotateSpeed));
+				isRotating = true;
 			} else if (Input.GetKey (KeyCode.RightArrow)) {
 				transform.Rotate (new Vector3 (0, 0, -rotateSpeed));
+				isRotating = true;
+			}
+			if (Input.GetKey (KeyCode.UpArrow)) {
+				transform.Rotate (new Vector3 (0, rotateSpeed, 0));
+				isRotating = true;
+			} else if (Input.GetKey (KeyCode.DownArrow)) {
+				transform.Rotate (new Vector3 (0, -rotateSpeed, 0));
+				isRotating = true;
 			}
 		}
 
 		void GeneratePlanetMesh () {
-			Mesh planetMesh = gameObject.GetComponent<MeshFilter> ().mesh;
-			Vector3[] vertices = planetMesh.vertices;
-			PerlinNoise terrainNoise = new PerlinNoise (terrainSeed);
-			for (int i = 0; i < vertices.Length; i++) {
-				double vert_x = (double)vertices[i].x;
-				double vert_y = (double)vertices[i].y;
-				double vert_z = (double)vertices[i].z;
-				float terrainMap = amplitude * (float)terrainNoise.Noise (vert_x / scale, vert_y / scale, vert_z / scale) / 12.0f + 1.0f;
+			terrainNoise = new PerlinNoise (terrainSeed);
+			for (int i = 0; i < terrainVerts.Length; i++) {
+				vert_x = (double)terrainVerts[i].x;
+				vert_y = (double)terrainVerts[i].y;
+				vert_z = (double)terrainVerts[i].z;
+				terrainMap = amplitude * (float)terrainNoise.Noise (vert_x / terrainSpread, vert_y / terrainSpread, vert_z / terrainSpread) / 12.0f + 1.0f;
 				if (terrainMap > 1.0f) {
 					terrainMap = 1.0f;
 				} else {
 					terrainMap = 0;
 				}
-				vertices[i] -= transform.position;
-				vertices[i] *= terrainMap;
-				GenerateAtmosphere (vertices[i]);
+				terrainVerts[i] -= transform.position;
+				terrainVerts[i] *= terrainMap;
+				GenerateAtmosphere (terrainVerts[i]);
 			}
-			planetMesh.vertices = vertices;
+			planetMesh.vertices = terrainVerts;
 			planetMesh.RecalculateNormals ();
 			planetMesh.Optimize ();
 		}
 
 
 		void GenerateAtmosphere (Vector3 skyPoint) {
-			GameObject cloudPrefab = (GameObject)Resources.Load ("Prefabs/Cloud");
 			skyPoint *= 1.25f;
-			PerlinNoise atmosphereNoise = new PerlinNoise (atmosphereSeed);
-			float cloudSpread = 0.25f;
-			float cloudMap = amplitude * (float)atmosphereNoise.Noise (skyPoint.x / cloudSpread, skyPoint.y / cloudSpread, skyPoint.z / cloudSpread) / 12.0f + 1.0f;
+			atmosphereNoise = new PerlinNoise (atmosphereSeed);
+			cloudMap = amplitude * (float)atmosphereNoise.Noise (skyPoint.x / cloudSpread, skyPoint.y / cloudSpread, skyPoint.z / cloudSpread) / 12.0f + 1.0f;
 			if (cloudMap > 1.1f) {
-				GameObject cloud = (GameObject)Instantiate(cloudPrefab, skyPoint, Quaternion.identity);
+				cloud = (GameObject)Instantiate(cloudPrefab, skyPoint, Quaternion.identity);
 				cloud.transform.parent = transform;
 			}
 		}

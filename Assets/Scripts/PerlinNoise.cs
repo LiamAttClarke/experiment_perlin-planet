@@ -1,7 +1,6 @@
 ﻿using System;
 
-namespace Universe
-{
+namespace Universe {
 	
 	/* Perlin noise class.  ( by Tom Nuydens (tom@delphi3d.net) )
  * Converted to C# by Mattias Fagerlund, Mattias.Fagerlund@cortego.se
@@ -32,8 +31,7 @@ http://freespace.virgin.net/hugo.elias/models/m_perlin.htm
   the accompanying demo.
 */
 	
-	public class PerlinNoise
-	{
+	public class PerlinNoise {
 		private const int GradientSizeTable = 256;
 		private readonly Random _random;
 		private readonly double[] _gradients = new double[GradientSizeTable * 3];
@@ -59,14 +57,12 @@ http://freespace.virgin.net/hugo.elias/models/m_perlin.htm
 			48, 79,147, 85, 30,207,219, 54, 88,234,190,122, 95, 67,143,109,
 			137,214,145, 93, 92,100,245,  0,216,186, 60, 83,105, 97,204, 52};
 		
-		public PerlinNoise(int seed)
-		{
+		public PerlinNoise(int seed) {
 			_random = new Random(seed);
 			InitGradients();
 		}
 		
-		public double Noise(double x, double y, double z)
-		{
+		public double Noise(double x, double y, double z) {
 			/* The main noise function. Looks up the pseudorandom gradients at the nearest
                lattice points, dots them with the input vector, and interpolates the
                results to produce a single output value in [0, 1] range. */
@@ -108,8 +104,7 @@ http://freespace.virgin.net/hugo.elias/models/m_perlin.htm
 			return Lerp(wz, vz0, vz1);
 		}
 		
-		private void InitGradients()
-		{
+		private void InitGradients() {
 			for (int i = 0; i < GradientSizeTable; i++)
 			{
 				double z = 1f - 2f * _random.NextDouble();
@@ -121,34 +116,29 @@ http://freespace.virgin.net/hugo.elias/models/m_perlin.htm
 			}
 		}
 		
-		private int Permutate(int x)
-		{
+		private int Permutate(int x) {
 			const int mask = GradientSizeTable - 1;
 			return _perm[x & mask];
 		}
 		
-		private int Index(int ix, int iy, int iz)
-		{
+		private int Index(int ix, int iy, int iz) {
 			// Turn an XYZ triplet into a single gradient table index.
 			return Permutate(ix + Permutate(iy + Permutate(iz)));
 		}
 		
-		private double Lattice(int ix, int iy, int iz, double fx, double fy, double fz)
-		{
+		private double Lattice(int ix, int iy, int iz, double fx, double fy, double fz) {
 			// Look up a random gradient at [ix,iy,iz] and dot it with the [fx,fy,fz] vector.
 			int index = Index(ix, iy, iz);
 			int g = index*3;
 			return _gradients[g] * fx + _gradients[g + 1] * fy + _gradients[g + 2] * fz;
 		}
 		
-		private double Lerp(double t, double value0, double value1)
-		{
+		private double Lerp(double t, double value0, double value1) {
 			// Simple linear interpolation.
 			return value0 + t * (value1 - value0);
 		}
 		
-		private double Smooth(double x)
-		{
+		private double Smooth(double x) {
 			/* Smoothing curve. This is used to calculate interpolants so that the noise
               doesn't look blocky when the frequency is low. */
 			return x * x * (3 - 2 * x);

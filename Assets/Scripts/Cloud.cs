@@ -1,29 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class Cloud : MonoBehaviour {
-	GameObject planet;
-	// Use this for initialization
-	void Start () {
-		planet = GameObject.Find("Planet");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		ResizeCloud ();
-	}
-
-	void ResizeCloud () {
-		Vector3 planetCloudVect = transform.position - planet.transform.position;
-		Vector3 cameraPlanetVect = planet.transform.position - Camera.main.transform.position;
-		float cloudCameraScal = Vector3.Dot(planetCloudVect.normalized, cameraPlanetVect.normalized) + 0.85f;
-		if (cloudCameraScal < 0) {
-			cloudCameraScal = 0;
-		} else if (cloudCameraScal > 0.2f) {
-			cloudCameraScal = 0.2f;
+namespace Universe {
+	public class Cloud : MonoBehaviour {
+		GameObject planet;
+		Vector3 planetCloudVect;
+		Vector3 planetCameraVect;
+		float cloudScale;
+		// Use this for initialization
+		void Start () {
+			planet = GameObject.Find("Planet");
+			ResizeCloud ();
 		}
-		transform.localScale = new Vector3 (cloudCameraScal, cloudCameraScal, cloudCameraScal);
-		transform.LookAt (transform.position * 2);
+		
+		void Update () {
+			if (planet.GetComponent<PlanetGenerator> ().isRotating) {
+				ResizeCloud ();
+			}
+		}
+		
+		void ResizeCloud () {
+			planetCloudVect = transform.position - planet.transform.position;
+			planetCameraVect = planet.transform.position - Camera.main.transform.position;
+			cloudScale = Vector3.Dot(planetCloudVect.normalized, planetCameraVect.normalized) + 0.85f;
+			if (cloudScale < 0) {
+				cloudScale = 0;
+			} else if (cloudScale > 0.2f) {
+				cloudScale = 0.2f;
+			}
+			transform.localScale = new Vector3 (cloudScale, cloudScale, cloudScale);
+			transform.LookAt (transform.position * 2);
+		}
 	}
 }
-	
