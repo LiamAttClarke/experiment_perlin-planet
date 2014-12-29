@@ -2,8 +2,8 @@
 using System.Collections;
 
 namespace Universe {
-	public class PlanetGenerator : MonoBehaviour {
-
+	public class Planet : MonoBehaviour {
+		
 		Mesh planetMesh;
 		Vector3[] terrainVerts;
 		PerlinNoise terrainNoise, atmosphereNoise;
@@ -12,11 +12,11 @@ namespace Universe {
 		GameObject cloudPrefab;
 		GameObject cloud;
 		float terrainMap, cloudMap;
-		float terrainSpread = 0.5f;
+		float terrainSpread = 0.75f;
 		float cloudSpread = 0.25f;
 		float amplitude = 12.0f;
 		float rotateSpeed = 1.0f;
-		public bool isRotating = false;
+		public bool isDragging = false;
 
 		// Use this for initialization
 		void Start () {
@@ -25,29 +25,32 @@ namespace Universe {
 			cloudPrefab = (GameObject)Resources.Load ("Prefabs/Cloud");
 			atmosphereSeed = Random.Range (0, 100);
 			terrainSeed = Random.Range (0, 100);
-			GeneratePlanetMesh ();
-		}
-		
-		// Update is called once per frame
-		void Update () {
-			isRotating = false;
-			if (Input.GetKey (KeyCode.LeftArrow)) {
-				transform.Rotate (new Vector3 (0, 0, rotateSpeed));
-				isRotating = true;
-			} else if (Input.GetKey (KeyCode.RightArrow)) {
-				transform.Rotate (new Vector3 (0, 0, -rotateSpeed));
-				isRotating = true;
-			}
-			if (Input.GetKey (KeyCode.UpArrow)) {
-				transform.Rotate (new Vector3 (0, rotateSpeed, 0));
-				isRotating = true;
-			} else if (Input.GetKey (KeyCode.DownArrow)) {
-				transform.Rotate (new Vector3 (0, -rotateSpeed, 0));
-				isRotating = true;
-			}
+			GenerateMesh ();
 		}
 
-		void GeneratePlanetMesh () {
+		Vector3 mouseDownPos = Vector3.zero;
+		// Update is called once per frame
+		void Update () {
+			float hitDist = 0;
+			if (Input.GetMouseButtonDown(0)) {
+				Ray rayOrigin = Camera.main.ScreenPointToRay (Input.mousePosition);
+				RaycastHit hitInfo;
+				if (Physics.Raycast (rayOrigin, out hitInfo) && hitInfo.collider.tag == "Planet") {
+					mouseDownPos = Input.mousePosition;
+					isDragging = true;
+				}
+			}
+			if (Input.GetMouseButton(0) && isDragging) {
+				Vector3 mousePos = Input.mousePosition;
+				Debug.Log (mousePos + " " + mouseDownPos);
+				transform.Rotate ((mousePos.y - mouseDownPos.y) / 100, (-mousePos.x - -mouseDownPos.x) / 100, 0, Space.World);
+			}
+			if (Input.GetMouseButtonUp(0)) {
+				isDragging = false;
+			}
+		}
+		
+		void GenerateMesh () {
 			terrainNoise = new PerlinNoise (terrainSeed);
 			for (int i = 0; i < terrainVerts.Length; i++) {
 				vert_x = (double)terrainVerts[i].x;
@@ -67,8 +70,8 @@ namespace Universe {
 			planetMesh.RecalculateNormals ();
 			planetMesh.Optimize ();
 		}
-
-
+		
+		
 		void GenerateAtmosphere (Vector3 skyPoint) {
 			skyPoint *= 1.25f;
 			atmosphereNoise = new PerlinNoise (atmosphereSeed);

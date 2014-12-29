@@ -48,7 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Cloud.cs" />
      <Compile Include="Assets\Scripts\PerlinNoise.cs" />
-     <Compile Include="Assets\Scripts\PlanetGenerator.cs" />
+     <Compile Include="Assets\Scripts\Planet.cs" />
+     <Compile Include="Assets\Scripts\PlayerControl.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>
