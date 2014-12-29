@@ -15,7 +15,10 @@ namespace Universe {
 		float terrainSpread = 0.75f;
 		float cloudSpread = 0.25f;
 		float amplitude = 12.0f;
-		float rotateSpeed = 1.0f;
+		Vector3 mouseDownPos = Vector3.zero;
+		float mouseDeltaPosX;
+		float mouseDeltaPosY;
+		float dragPercision = 0.5f;
 		public bool isDragging = false;
 
 		// Use this for initialization
@@ -28,10 +31,8 @@ namespace Universe {
 			GenerateMesh ();
 		}
 
-		Vector3 mouseDownPos = Vector3.zero;
 		// Update is called once per frame
 		void Update () {
-			float hitDist = 0;
 			if (Input.GetMouseButtonDown(0)) {
 				Ray rayOrigin = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hitInfo;
@@ -41,13 +42,14 @@ namespace Universe {
 				}
 			}
 			if (Input.GetMouseButton(0) && isDragging) {
-				Vector3 mousePos = Input.mousePosition;
-				Debug.Log (mousePos + " " + mouseDownPos);
-				transform.Rotate ((mousePos.y - mouseDownPos.y) / 100, (-mousePos.x - -mouseDownPos.x) / 100, 0, Space.World);
+				mouseDeltaPosY = Input.mousePosition.y - mouseDownPos.y;
+				mouseDeltaPosX = Input.mousePosition.x - mouseDownPos.x;
+				transform.Rotate (mouseDeltaPosY * dragPercision, -mouseDeltaPosX * dragPercision, 0, Space.World);
 			}
 			if (Input.GetMouseButtonUp(0)) {
 				isDragging = false;
 			}
+			mouseDownPos = Input.mousePosition;
 		}
 		
 		void GenerateMesh () {

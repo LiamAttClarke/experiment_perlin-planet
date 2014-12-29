@@ -21,12 +21,7 @@ namespace Universe {
 		void ResizeCloud () {
 			planetCloudVect = transform.position - planet.transform.position;
 			planetCameraVect = planet.transform.position - Camera.main.transform.position;
-			cloudScale = Vector3.Dot(planetCloudVect.normalized, planetCameraVect.normalized) + 0.85f;
-			if (cloudScale < 0) {
-				cloudScale = 0;
-			} else if (cloudScale > 0.2f) {
-				cloudScale = 0.2f;
-			}
+			cloudScale = Mathf.Clamp (Vector3.Dot(planetCloudVect.normalized, planetCameraVect.normalized) + 0.85f, 0, 0.2f);
 			transform.localScale = new Vector3 (cloudScale, cloudScale, cloudScale);
 			transform.LookAt (transform.position * 2);
 		}
