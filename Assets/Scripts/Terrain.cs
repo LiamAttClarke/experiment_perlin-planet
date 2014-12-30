@@ -2,7 +2,7 @@
 using System.Collections;
 
 namespace Universe {
-	public class Planet : MonoBehaviour {
+	public class Terrain : MonoBehaviour {
 		
 		Mesh planetMesh;
 		Vector3[] terrainVerts;
@@ -15,12 +15,7 @@ namespace Universe {
 		float terrainSpread = 0.75f;
 		float cloudSpread = 0.25f;
 		float amplitude = 12.0f;
-		Vector3 mouseDownPos = Vector3.zero;
-		float mouseDeltaPosX;
-		float mouseDeltaPosY;
-		float dragPercision = 0.5f;
-		public bool isDragging = false;
-
+		
 		// Use this for initialization
 		void Start () {
 			planetMesh = gameObject.GetComponent<MeshFilter> ().mesh;
@@ -29,27 +24,6 @@ namespace Universe {
 			atmosphereSeed = Random.Range (0, 100);
 			terrainSeed = Random.Range (0, 100);
 			GenerateMesh ();
-		}
-
-		// Update is called once per frame
-		void Update () {
-			if (Input.GetMouseButtonDown(0)) {
-				Ray rayOrigin = Camera.main.ScreenPointToRay (Input.mousePosition);
-				RaycastHit hitInfo;
-				if (Physics.Raycast (rayOrigin, out hitInfo) && hitInfo.collider.tag == "Planet") {
-					mouseDownPos = Input.mousePosition;
-					isDragging = true;
-				}
-			}
-			if (Input.GetMouseButton(0) && isDragging) {
-				mouseDeltaPosY = Input.mousePosition.y - mouseDownPos.y;
-				mouseDeltaPosX = Input.mousePosition.x - mouseDownPos.x;
-				transform.Rotate (mouseDeltaPosY * dragPercision, -mouseDeltaPosX * dragPercision, 0, Space.World);
-			}
-			if (Input.GetMouseButtonUp(0)) {
-				isDragging = false;
-			}
-			mouseDownPos = Input.mousePosition;
 		}
 		
 		void GenerateMesh () {

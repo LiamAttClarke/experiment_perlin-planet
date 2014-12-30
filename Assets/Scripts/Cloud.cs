@@ -13,9 +13,7 @@ namespace Universe {
 		}
 		
 		void Update () {
-			if (planet.GetComponent<Planet> ().isDragging) {
-				ResizeCloud ();
-			}
+			ResizeCloud ();
 		}
 		
 		void ResizeCloud () {
