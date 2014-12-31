@@ -34,7 +34,7 @@ namespace Universe {
 				vert_x = (double)terrainVerts[i].x;
 				vert_y = (double)terrainVerts[i].y;
 				vert_z = (double)terrainVerts[i].z;
-				terrainMap = Mathf.Clamp (terrainAmpl * (float)planetNoise.Noise (vert_x / terrainSpread, vert_y / terrainSpread, vert_z / terrainSpread) + 1.0f, 0.9f, 1.0f);
+				terrainMap = Mathf.Clamp (terrainAmpl * (float)planetNoise.Noise (vert_x / terrainSpread, vert_y / terrainSpread, vert_z / terrainSpread) + 1.0f, 0.85f, 1.0f);
 				terrainVerts[i] *= terrainMap;
 				GenerateAtmosphere (terrainVerts[i]);
 				PlantTrees (terrainVerts[i], terrainMap);
