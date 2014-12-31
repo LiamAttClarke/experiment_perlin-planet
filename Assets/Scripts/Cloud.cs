@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+
 namespace Universe {
 	public class Cloud : MonoBehaviour {
 		GameObject planet;
@@ -9,7 +10,8 @@ namespace Universe {
 		// Use this for initialization
 		void Start () {
 			planet = GameObject.Find("Planet");
-			ResizeCloud ();
+			transform.LookAt (transform.position * 2);
+//			ResizeCloud ();
 		}
 		
 		void Update () {
@@ -21,7 +23,6 @@ namespace Universe {
 			planetCameraVect = planet.transform.position - Camera.main.transform.position;
 			cloudScale = Mathf.Clamp (Vector3.Dot(planetCloudVect.normalized, planetCameraVect.normalized) + 0.85f, 0, 0.2f);
 			transform.localScale = new Vector3 (cloudScale, cloudScale, cloudScale);
-			transform.LookAt (transform.position * 2);
 		}
 	}
 }
