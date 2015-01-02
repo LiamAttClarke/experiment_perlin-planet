@@ -12,7 +12,7 @@ namespace Universe {
 		GameObject cloudPrefab, cloud, treePrefab, tree;
 		float terrainMap, cloudMap, treeMap;
 		float terrainSpread = 0.75f;
-		float terrainAmpl = 2.0f;
+		float terrainAmpl = 1f;
 		float cloudSpread = 0.3f;
 		float cloudAmpl = 0.25f;
 		float treeAmpl = 5.0f;

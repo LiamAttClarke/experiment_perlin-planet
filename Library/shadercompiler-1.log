@@ -1,0 +1,67 @@
+Base path: C:/Program Files (x86)/Unity/Editor/Data
+Pipe name: \\.\pipe\UnityShaderCompiler-1-544
+Cmd: getPlatforms
+Cmd: preprocess
+  insize=1614 outsize=385 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1526 outsize=2168 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1526 outsize=502 kw= ok=1
+Cmd: preprocess
+  insize=1614 outsize=385 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1526 outsize=2168 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1526 outsize=502 kw= ok=1
+Cmd: preprocess
+  insize=1614 outsize=385 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1526 outsize=2168 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1526 outsize=502 kw= ok=1
+Cmd: preprocess
+  insize=1614 outsize=385 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1526 outsize=2168 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1526 outsize=502 kw= ok=1
+Cmd: preprocess
+  insize=1614 outsize=385 ok=1
+Cmd: preprocess
+  insize=1614 outsize=385 ok=1
+Cmd: preprocess
+  insize=1658 outsize=385 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1570 outsize=2306 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1570 outsize=502 kw= ok=1
+Cmd: preprocess
+  insize=1658 outsize=385 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1570 outsize=2306 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1570 outsize=502 kw= ok=1
+Cmd: preprocess
+  insize=1658 outsize=385 ok=1
+Cmd: preprocess
+  insize=1843 outsize=385 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1755 outsize=2306 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1755 outsize=502 kw= ok=1
+Cmd: preprocess
+  insize=1658 outsize=385 ok=1
+Cmd: preprocess
+  insize=1658 outsize=385 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1570 outsize=2306 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1570 outsize=502 kw= ok=1
+Cmd: preprocess
+  insize=1657 outsize=385 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1569 outsize=2306 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1569 outsize=502 kw= ok=1
+Cmd: preprocess
+  insize=1658 outsize=385 ok=1

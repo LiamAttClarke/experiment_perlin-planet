@@ -5,7 +5,7 @@ namespace Universe {
 	public class PlayerControl : MonoBehaviour {
 
 		float mouseDeltaPosX, mouseDeltaPosY, timeMouseUp, initVelocityX, initVelocityY, velocityX, velocityY;
-		float inputPrecision = 0.5f;
+		float inputPrecision = 0.25f;
 		float inertiaDuration = 1.5f;
 		Vector3 mouseLastPos = Vector3.zero;
 		RaycastHit hitInfo;
