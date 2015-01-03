@@ -4,15 +4,15 @@ using System.Collections;
 namespace Universe {
 	public class Terrain : MonoBehaviour {
 		
-		Mesh planetMesh;
-		Vector3[] terrainVerts;
+		Mesh terrainMesh;
+		Vector3[] terrainVerts, sphereVerts;
 		PerlinNoise planetNoise;
 		int planetSeed;
 		double vert_x, vert_y, vert_z;
-		GameObject cloudPrefab, cloud, treePrefab, tree;
+		GameObject cloudPrefab, cloud, oakTreePrefab, spruceTreePrefab, tree, treeType, planet;
 		float terrainMap, cloudMap, treeMap;
 		float terrainSpread = 0.75f;
-		float terrainAmpl = 1f;
+		float terrainAmpl = 0.75f;
 		float cloudSpread = 0.3f;
 		float cloudAmpl = 0.25f;
 		float treeAmpl = 5.0f;
@@ -20,13 +20,17 @@ namespace Universe {
 		
 		// Use this for initialization
 		void Start () {
-			planetMesh = gameObject.GetComponent<MeshFilter> ().mesh;
-			terrainVerts = planetMesh.vertices;
+			terrainMesh = gameObject.GetComponent<MeshFilter> ().mesh;
+			terrainVerts = terrainMesh.vertices;
 			cloudPrefab = (GameObject)Resources.Load ("Prefabs/Cloud");
-			treePrefab = (GameObject)Resources.Load ("Prefabs/Tree");
+			oakTreePrefab = (GameObject)Resources.Load ("Prefabs/Tree_Oak");
+			spruceTreePrefab = (GameObject)Resources.Load ("Prefabs/Tree_Spruce");
+			planet = GameObject.Find ("Planet");
+			sphereVerts = GameObject.Find ("Icosphere").GetComponent<MeshFilter> ().mesh.vertices;
 			planetSeed = Random.Range (0, 100);
 			planetNoise = new PerlinNoise (planetSeed);
 			GenerateMesh ();
+			SetVertex ();
 		}
 		
 		void GenerateMesh () {
@@ -36,12 +40,17 @@ namespace Universe {
 				vert_z = (double)terrainVerts[i].z;
 				terrainMap = Mathf.Clamp (terrainAmpl * (float)planetNoise.Noise (vert_x / terrainSpread, vert_y / terrainSpread, vert_z / terrainSpread) + 1.0f, 0.85f, 1.0f);
 				terrainVerts[i] *= terrainMap;
-				GenerateAtmosphere (terrainVerts[i]);
-				PlantTrees (terrainVerts[i], terrainMap);
 			}
-			planetMesh.vertices = terrainVerts;
-			planetMesh.RecalculateNormals ();
-			planetMesh.Optimize ();
+			terrainMesh.vertices = terrainVerts;
+			terrainMesh.RecalculateNormals ();
+			terrainMesh.Optimize ();
+		}
+		void SetVertex () {
+			for (int i = 0; i < sphereVerts.Length; i++) {
+				terrainMap = Mathf.Clamp (terrainAmpl * (float)planetNoise.Noise (sphereVerts[i].x / terrainSpread, sphereVerts[i].y / terrainSpread, sphereVerts[i].z / terrainSpread) + 1.0f, 0.85f, 1.0f);
+				GenerateAtmosphere (sphereVerts[i]);
+				PlantTrees (sphereVerts[i], terrainMap);
+			}
 		}
 
 		void GenerateAtmosphere (Vector3 vertPos) {
@@ -49,16 +58,22 @@ namespace Universe {
 			cloudMap = cloudAmpl * (float)planetNoise.Noise (vertPos.x / cloudSpread, vertPos.y / cloudSpread, vertPos.z / cloudSpread);
 			if (cloudMap > 0.05f) {
 				cloud = (GameObject)Instantiate(cloudPrefab, vertPos, Quaternion.identity);
-				cloud.transform.parent = transform;
+				cloud.transform.parent = planet.transform;
 			}
 		}
 
 		void PlantTrees (Vector3 vertPos, float terrainHeight) {
 			vertPos *= 1.15f;
+			int rand = Random.Range (0,2);
+			if (rand == 0) {
+				treeType = oakTreePrefab;
+			} else {
+				treeType = spruceTreePrefab;
+			}
 			treeMap = treeAmpl * (float)planetNoise.Noise (vertPos.x / treeSpread, vertPos.y / treeSpread, vertPos.z / treeSpread);
 			if (terrainHeight == 1.0f && treeMap > 0.5f) {
-				tree = (GameObject)Instantiate (treePrefab, vertPos, Quaternion.identity);
-				tree.transform.parent = transform;
+				tree = (GameObject)Instantiate (treeType, vertPos, Quaternion.identity);
+				tree.transform.parent = planet.transform;
 			}
 		}
 	}

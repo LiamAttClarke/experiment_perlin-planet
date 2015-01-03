@@ -1,6 +1,6 @@
 ﻿Shader "Custom/TerrainShader" {
 	Properties {
-		_Color_Rock ("Color_Rock", Color) = (0, 0, 0, 0)
+		_Color_DeepSand ("Color_Rock", Color) = (0, 0, 0, 0)
 		_Color_Sand ("Color_Sand", Color) = (0, 0, 0, 0)
 		_Color_Grass ("Color_Grass", Color) = (0, 0, 0, 0)
 		_Color_Snow ("Color_Snow", Color) = (0, 0, 0, 0)
@@ -14,7 +14,7 @@
 			#pragma fragment frag
 			
 			// User defined variables
-			uniform float4 _Color_Rock;
+			uniform float4 _Color_DeepSand;
 			uniform float4 _Color_Sand;
 			uniform float4 _Color_Grass;
 			uniform float4 _Color_Snow;
@@ -41,13 +41,17 @@
 				float3 lightFinal = (atten * _LightColor0 * max (0.0, dot (normalDir, lightDir))) + UNITY_LIGHTMODEL_AMBIENT.xyz;
 				float4 vertColor;
 				float vertMag = sqrt ((i.vert.x * i.vert.x) + (i.vert.y * i.vert.y) + (i.vert.z * i.vert.z));
-				if (vertMag >= 0.95) {
+				if (vertMag >= 0.97) {
 					vertColor = _Color_Grass;
 				} else if (vertMag > 0.86) {
 				 	vertColor = _Color_Sand;
 				} else {
-					vertColor = _Color_Rock;
+					vertColor = _Color_DeepSand;
 				}
+				// North & South Poles
+//				if (i.vert.y > 0.8 || i.vert.y < -0.8) {
+//					vertColor = _Color_Snow;
+//				}
 				o.col = float4 (lightFinal * vertColor, 1.0);
 				o.pos = mul (UNITY_MATRIX_MVP, i.vert);
 				return o;

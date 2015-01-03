@@ -17,6 +17,9 @@ namespace Universe {
 		}
 
 		void Update () {
+			if (Input.GetMouseButton(1)) {
+				RaiseLand ();
+			}
 			if (Input.GetMouseButtonDown(0)) {
 				Ray rayOrigin = Camera.main.ScreenPointToRay (Input.mousePosition);
 				if (Physics.Raycast (rayOrigin, out hitInfo) && hitInfo.collider.tag == "Planet") {
@@ -50,6 +53,14 @@ namespace Universe {
 			}
 			if (velocityX == 0 && velocityY == 0) {
 				isReleased = false;
+			}
+		}
+		void RaiseLand () {
+			RaycastHit[] rayCastAll = Physics.RaycastAll (Camera.main.ScreenPointToRay (Input.mousePosition));
+			for (int i = 0; i < rayCastAll.Length; i++) {
+				if (rayCastAll[i].collider.tag == "Terrain") {
+					// terraform
+				}
 			}
 		}
 	}
