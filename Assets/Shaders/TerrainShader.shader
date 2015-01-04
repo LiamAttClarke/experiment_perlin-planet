@@ -41,7 +41,9 @@
 				float3 lightFinal = (atten * _LightColor0 * max (0.0, dot (normalDir, lightDir))) + UNITY_LIGHTMODEL_AMBIENT.xyz;
 				float4 vertColor;
 				float vertMag = sqrt ((i.vert.x * i.vert.x) + (i.vert.y * i.vert.y) + (i.vert.z * i.vert.z));
-				if (vertMag >= 0.97) {
+				if (vertMag > 1.15) {
+				vertColor = _Color_Snow;
+				} else if (vertMag >= 0.97) {
 					vertColor = _Color_Grass;
 				} else if (vertMag > 0.86) {
 				 	vertColor = _Color_Sand;

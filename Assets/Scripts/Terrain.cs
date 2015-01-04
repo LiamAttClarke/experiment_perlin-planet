@@ -11,10 +11,13 @@ namespace Universe {
 		double vert_x, vert_y, vert_z;
 		GameObject cloudPrefab, cloud, oakTreePrefab, spruceTreePrefab, tree, treeType, planet;
 		float terrainMap, cloudMap, treeMap;
+
 		float terrainSpread = 0.75f;
 		float terrainAmpl = 0.75f;
+
 		float cloudSpread = 0.3f;
 		float cloudAmpl = 0.25f;
+
 		float treeAmpl = 5.0f;
 		float treeSpread = 0.1f;
 		
@@ -38,6 +41,7 @@ namespace Universe {
 				vert_x = (double)terrainVerts[i].x;
 				vert_y = (double)terrainVerts[i].y;
 				vert_z = (double)terrainVerts[i].z;
+				// Plains and water
 				terrainMap = Mathf.Clamp (terrainAmpl * (float)planetNoise.Noise (vert_x / terrainSpread, vert_y / terrainSpread, vert_z / terrainSpread) + 1.0f, 0.85f, 1.0f);
 				terrainVerts[i] *= terrainMap;
 			}
@@ -45,6 +49,7 @@ namespace Universe {
 			terrainMesh.RecalculateNormals ();
 			terrainMesh.Optimize ();
 		}
+
 		void SetVertex () {
 			for (int i = 0; i < sphereVerts.Length; i++) {
 				terrainMap = Mathf.Clamp (terrainAmpl * (float)planetNoise.Noise (sphereVerts[i].x / terrainSpread, sphereVerts[i].y / terrainSpread, sphereVerts[i].z / terrainSpread) + 1.0f, 0.85f, 1.0f);
