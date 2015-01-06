@@ -8,12 +8,14 @@ namespace Universe {
 		float inputPrecision = 0.25f;
 		float inertiaDuration = 1.5f;
 		Vector3 mouseLastPos = Vector3.zero;
-		RaycastHit hitInfo;
+		RaycastHit target;
 		bool isDragging, isReleased;
-		GameObject planet;
+		GameObject planet, terrain;
+		int layerMask9;
 
 		void Start () {
 			planet = GameObject.Find ("Planet");
+			terrain = GameObject.Find ("Terrain");
 		}
 
 		void Update () {
@@ -21,8 +23,7 @@ namespace Universe {
 				RaiseLand ();
 			}
 			if (Input.GetMouseButtonDown(0)) {
-				Ray rayOrigin = Camera.main.ScreenPointToRay (Input.mousePosition);
-				if (Physics.Raycast (rayOrigin, out hitInfo) && hitInfo.collider.tag == "Planet") {
+				if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out target) && target.collider.tag == "Planet") {
 					mouseLastPos = Input.mousePosition;
 					isDragging = true;
 					isReleased = false;
@@ -56,11 +57,16 @@ namespace Universe {
 			}
 		}
 		void RaiseLand () {
-			RaycastHit[] rayCastAll = Physics.RaycastAll (Camera.main.ScreenPointToRay (Input.mousePosition));
-			for (int i = 0; i < rayCastAll.Length; i++) {
-				if (rayCastAll[i].collider.tag == "Terrain") {
-					// terraform
+			RaycastHit hitInfo;
+			layerMask9 = 1 << 9;
+			if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out hitInfo, 10.0f, layerMask9)) {
+				Vector3[] terrainVerts = terrain.GetComponent<MeshFilter> ().mesh.vertices;
+				for (int i = 0; i < terrainVerts.Length; i++) {
+					if (Vector3.Distance (terrainVerts[i], hitInfo.point) < 0.25f) {
+						terrainVerts[i] *= 1.0075f;
+					}
 				}
+				terrain.GetComponent<MeshFilter> ().mesh.vertices = terrainVerts;
 			}
 		}
 	}
