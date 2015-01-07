@@ -5,7 +5,7 @@ namespace Universe {
 	public class Terrain : MonoBehaviour {
 		
 		Mesh terrainMesh;
-		Vector3[] terrainVerts, sphereVerts;
+		Vector3[] terrainVerts;
 		PerlinNoise planetNoise;
 		int planetSeed;
 		double vert_x, vert_y, vert_z;
@@ -29,11 +29,9 @@ namespace Universe {
 			oakTreePrefab = (GameObject)Resources.Load ("Prefabs/Tree_Oak");
 			spruceTreePrefab = (GameObject)Resources.Load ("Prefabs/Tree_Spruce");
 			planet = GameObject.Find ("Planet");
-			sphereVerts = GameObject.Find ("Icosphere").GetComponent<MeshFilter> ().mesh.vertices;
 			planetSeed = Random.Range (0, 100);
 			planetNoise = new PerlinNoise (planetSeed);
 			GenerateMesh ();
-			SetVertex ();
 		}
 		
 		void GenerateMesh () {
@@ -44,18 +42,12 @@ namespace Universe {
 				// Plains and water
 				terrainMap = Mathf.Clamp (terrainAmpl * (float)planetNoise.Noise (vert_x / terrainSpread, vert_y / terrainSpread, vert_z / terrainSpread) + 1.0f, 0.85f, 1.0f);
 				terrainVerts[i] *= terrainMap;
+				GenerateAtmosphere (terrainVerts[i]);
+				PlantTrees (terrainVerts[i], i, terrainMap);
 			}
 			terrainMesh.vertices = terrainVerts;
 			terrainMesh.RecalculateNormals ();
 			terrainMesh.Optimize ();
-		}
-
-		void SetVertex () {
-			for (int i = 0; i < sphereVerts.Length; i++) {
-				terrainMap = Mathf.Clamp (terrainAmpl * (float)planetNoise.Noise (sphereVerts[i].x / terrainSpread, sphereVerts[i].y / terrainSpread, sphereVerts[i].z / terrainSpread) + 1.0f, 0.85f, 1.0f);
-				GenerateAtmosphere (sphereVerts[i]);
-				PlantTrees (sphereVerts[i], terrainMap);
-			}
 		}
 
 		void GenerateAtmosphere (Vector3 vertPos) {
@@ -67,7 +59,7 @@ namespace Universe {
 			}
 		}
 
-		void PlantTrees (Vector3 vertPos, float terrainHeight) {
+		void PlantTrees (Vector3 vertPos, int vertIndex, float terrainHeight) {
 			vertPos *= 1.15f;
 			int rand = Random.Range (0,2);
 			if (rand == 0) {
@@ -79,6 +71,7 @@ namespace Universe {
 			if (terrainHeight == 1.0f && treeMap > 0.5f) {
 				tree = (GameObject)Instantiate (treeType, vertPos, Quaternion.identity);
 				tree.transform.parent = planet.transform;
+				tree.GetComponent<Plant> ().vertexNum = vertIndex;
 			}
 		}
 	}
