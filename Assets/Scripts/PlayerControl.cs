@@ -63,7 +63,7 @@ namespace Universe {
 				Vector3[] terrainVerts = terrain.GetComponent<MeshFilter> ().mesh.vertices;
 				for (int i = 0; i < terrainVerts.Length; i++) {
 					if (Vector3.Distance (terrainVerts[i], hitInfo.point) < 0.25f) {
-						terrainVerts[i] *= 1.0075f;
+						terrainVerts[i] *= 0.99075f;
 						Mathf.Clamp (terrainVerts[i].magnitude, 0.98f, 1.0f);
 					}
 				}
