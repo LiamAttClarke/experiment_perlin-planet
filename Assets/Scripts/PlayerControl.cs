@@ -5,6 +5,7 @@ namespace Universe {
 	public class PlayerControl : MonoBehaviour {
 
 		float mouseDeltaPosX, mouseDeltaPosY, timeMouseUp, initVelocityX, initVelocityY, velocityX, velocityY;
+		float terrainMult = 0.9975f;
 		float inputPrecision = 0.25f;
 		float inertiaDuration = 1.5f;
 		Vector3 mouseLastPos = Vector3.zero;
@@ -19,6 +20,12 @@ namespace Universe {
 		}
 
 		void Update () {
+			if (Input.GetKeyDown (KeyCode.Equals)) {
+				terrainMult = 1.0075f;
+			}
+			if (Input.GetKeyDown (KeyCode.Minus)) {
+				terrainMult = 0.9975f;
+			}
 			if (Input.GetMouseButton(1)) {
 				RaiseLand ();
 			}
@@ -62,8 +69,9 @@ namespace Universe {
 			if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out hitInfo, 10.0f, layerMask9)) {
 				Vector3[] terrainVerts = terrain.GetComponent<MeshFilter> ().mesh.vertices;
 				for (int i = 0; i < terrainVerts.Length; i++) {
-					if (Vector3.Distance (terrainVerts[i], hitInfo.point) < 0.25f) {
-						terrainVerts[i] *= 0.99075f;
+					Vector3 hitPoint = planet.transform.InverseTransformPoint (hitInfo.point);
+					if (Vector3.Distance (terrainVerts[i], hitPoint) < 0.25f) {
+						terrainVerts[i] *= terrainMult;
 						Mathf.Clamp (terrainVerts[i].magnitude, 0.98f, 1.0f);
 					}
 				}

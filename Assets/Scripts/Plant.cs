@@ -3,8 +3,6 @@ using System.Collections;
 
 namespace Universe {
 	public class Plant : MonoBehaviour {
-		GameObject terrain;
-		Mesh terrainMesh;
 		float posY;
 		bool drop = true;
 		bool remove = true;
@@ -12,8 +10,6 @@ namespace Universe {
 		// Use this for initialization
 		void Start () {
 			transform.LookAt (transform.position * 2);
-			terrain = GameObject.Find ("Terrain");
-			terrainMesh = terrain.GetComponent<MeshFilter> ().mesh;
 			MovePlant ();
 			if (transform.position.magnitude < 0.98f) {
 				transform.localScale = Vector2.zero;
