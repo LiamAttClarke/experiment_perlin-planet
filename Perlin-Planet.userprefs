@@ -1,9 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Ocean.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Shaders\TerrainShader.shader">
     <Files>
-      <File FileName="Assets\Scripts\PlayerControl.cs" Line="27" Column="26" />
-      <File FileName="Assets\Scripts\Ocean.cs" Line="40" Column="1" />
+      <File FileName="Assets\Shaders\TerrainShader.shader" Line="101" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

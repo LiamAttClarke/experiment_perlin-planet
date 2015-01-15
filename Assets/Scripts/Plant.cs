@@ -19,7 +19,7 @@ namespace Universe {
 		}
 
 		void Update () {
-			if (Time.time > -posY && drop) {
+			if (Time.time > (-posY + 1.0f) && drop) {
 				anim.Play ("Drop");
 				drop = false;
 			}
