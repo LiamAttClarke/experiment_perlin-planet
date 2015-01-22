@@ -72,7 +72,6 @@ namespace Universe {
 					Vector3 hitPoint = planet.transform.InverseTransformPoint (hitInfo.point);
 					if (Vector3.Distance (terrainVerts[i], hitPoint) < 0.25f) {
 						terrainVerts[i] *= terrainMult;
-						Mathf.Clamp (terrainVerts[i].magnitude, 0.98f, 1.0f);
 					}
 				}
 				terrain.GetComponent<MeshFilter> ().mesh.vertices = terrainVerts;

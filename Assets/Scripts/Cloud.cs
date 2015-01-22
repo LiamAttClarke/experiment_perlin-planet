@@ -37,8 +37,6 @@ namespace Universe {
 			planetCameraVect = planet.transform.position - Camera.main.transform.position;
 			cloudScale = Mathf.Clamp (Vector3.Dot(planetCloudVect.normalized, planetCameraVect.normalized) + cloudOverHang, 0, 0.2f) / 1.25f;
 			transform.localScale = new Vector3 (cloudScale, cloudScale, cloudScale);
-			Color cloudCol = gameObject.GetComponent<MeshRenderer> ().material.color;
-			gameObject.GetComponent<MeshRenderer> ().material.color = new Color (cloudCol.r, cloudCol.g, cloudCol.b, cloudScale * 4);
 		}
 	}
 }

@@ -52,7 +52,10 @@
      <Compile Include="Assets\Scripts\Plant.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Terrain.cs" />
-     <None Include="Assets\Shaders\TerrainShader.shader" />
+     <None Include="Assets\Shaders\Ocean.shader" />
+     <None Include="Assets\Shaders\Object.shader" />
+     <None Include="Assets\Shaders\Cloud.shader" />
+     <None Include="Assets\Shaders\Terrain.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>

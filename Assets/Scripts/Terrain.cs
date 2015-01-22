@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace Universe {
 	public class Terrain : MonoBehaviour {
-		
+
 		Mesh terrainMesh;
 		Vector3[] terrainVerts;
 		PerlinNoise planetNoise;
 		int planetSeed, randTree;
 		double vert_x, vert_y, vert_z;
-		GameObject cloudPrefab, cloud, oakTreePrefab, spruceTreePrefab, tree, treeType, planet;
+		GameObject cloudPrefab, cloud, treePrefab, tree, planet;
 		float terrainMap, cloudMap, treeMap;
 		List<Vector3> vertList;
 		// Terrain
@@ -23,13 +23,12 @@ namespace Universe {
 		// Surface objects
 		float treeAmpl = 5.0f;
 		float treeSpread = 0.1f;
-		
+
 		// Use this for initialization
 		void Start () {
 			// Initialize gameObjects
 			cloudPrefab = (GameObject)Resources.Load ("Prefabs/Cloud");
-			oakTreePrefab = (GameObject)Resources.Load ("Prefabs/Tree_Oak");
-			spruceTreePrefab = (GameObject)Resources.Load ("Prefabs/Tree_Spruce");
+			treePrefab = (GameObject)Resources.Load ("Prefabs/Tree");
 			planet = GameObject.Find ("Planet");
 			// Terrain mesh
 			terrainMesh = gameObject.GetComponent<MeshFilter> ().mesh;
@@ -81,17 +80,10 @@ namespace Universe {
 		}
 
 		void PlantTrees (Vector3 vertPos) {
-			// Randomize objects placed
-			randTree = Random.Range (0,2);
-			if (randTree == 0) {
-				treeType = oakTreePrefab;
-			} else {
-				treeType = spruceTreePrefab;
-			}
 			// Perlin Noise for tree distribution
 			treeMap = treeAmpl * (float)planetNoise.Noise (vertPos.x / treeSpread, vertPos.y / treeSpread, vertPos.z / treeSpread);
 			if (treeMap > 0.5f) {
-				tree = (GameObject)Instantiate (treeType, vertPos, Quaternion.identity);
+				tree = (GameObject)Instantiate (treePrefab, vertPos, Quaternion.identity);
 				tree.transform.parent = planet.transform;
 			}
 		}
