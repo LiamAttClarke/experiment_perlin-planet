@@ -31,9 +31,12 @@
 				vertexOut o;
 				float3 normalDir = normalize (mul (i.norm, _World2Object).xyz);
 				float3 lightDir = normalize (_WorldSpaceLightPos0.xyz);
-				float atten = 1.0;
+				float3 viewDir = normalize (_WorldSpaceCameraPos.xyz - i.vert.xyz);
+				float diffAtten = 1.25;
 				float rimAtten = 0.25;
-				float3 lightFinal = (_LightColor0 * (atten * max (0.0, dot (normalDir, lightDir)))) + (rimAtten * (1 / max (0.0, dot (normalDir, lightDir) + 0.1))) + UNITY_LIGHTMODEL_AMBIENT.xyz;
+				float3 diffuseLight = diffAtten * (0.0, dot (normalDir, lightDir));
+				float3 rimLight = rimAtten * (1 / dot (normalDir, viewDir) + 0.1);
+				float3 lightFinal = (_LightColor0 * diffuseLight) + rimLight + UNITY_LIGHTMODEL_AMBIENT.xyz;
 				o.col = float4 (lightFinal * _Color, 1.0);
 				o.pos = mul (UNITY_MATRIX_MVP, i.vert);
 				return o;

@@ -15,14 +15,16 @@ namespace Universe {
 		float terrainMap, cloudMap, treeMap;
 		List<Vector3> vertList;
 		// Terrain
-		float terrainSpread = 0.75f;
 		float terrainAmpl = 0.75f;
+		float terrainSpread = 0.75f;
 		// Atmosphere
+		float cloudAmpl = 0.125f;
 		float cloudSpread = 0.3f;
-		float cloudAmpl = 0.25f;
+		float cloudSpread2 = 0.15f;
 		// Surface objects
-		float treeAmpl = 5.0f;
+		float treeAmpl = 2.5f;
 		float treeSpread = 0.1f;
+		float treeSpread2 = 0.05f;
 
 		// Use this for initialization
 		void Start () {
@@ -73,6 +75,7 @@ namespace Universe {
 			vertPos *= 1.5f;
 			// Perlin Noise for cloud distrubution
 			cloudMap = cloudAmpl * (float)planetNoise.Noise (vertPos.x / cloudSpread, vertPos.y / cloudSpread, vertPos.z / cloudSpread);
+			cloudMap += cloudAmpl * (float)planetNoise.Noise (vertPos.x / cloudSpread2, vertPos.y / cloudSpread2, vertPos.z / cloudSpread2);
 			if (cloudMap > 0.05f) {
 				cloud = (GameObject)Instantiate(cloudPrefab, vertPos, Quaternion.identity);
 				cloud.transform.parent = planet.transform;
@@ -82,6 +85,7 @@ namespace Universe {
 		void PlantTrees (Vector3 vertPos) {
 			// Perlin Noise for tree distribution
 			treeMap = treeAmpl * (float)planetNoise.Noise (vertPos.x / treeSpread, vertPos.y / treeSpread, vertPos.z / treeSpread);
+			treeMap += treeAmpl * (float)planetNoise.Noise (vertPos.x / treeSpread2, vertPos.y / treeSpread2, vertPos.z / treeSpread2);
 			if (treeMap > 0.5f) {
 				tree = (GameObject)Instantiate (treePrefab, vertPos, Quaternion.identity);
 				tree.transform.parent = planet.transform;

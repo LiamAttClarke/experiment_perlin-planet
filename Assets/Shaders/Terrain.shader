@@ -35,11 +35,19 @@
 			// Vertex function
 			vertexOut vert (vertexIn i) {
 				vertexOut o;
+				
+				// vectors
 				float3 normalDir = normalize (mul (i.norm, _World2Object).xyz);
 				float3 lightDir = normalize (_WorldSpaceLightPos0.xyz);
-				float atten = 1.25;
+				float3 viewDir = normalize (_WorldSpaceCameraPos.xyz);
+				
+				// lighting
+				float diffuseAtten = 1.5;
 				float rimAtten = 0.25;
-				float3 lightFinal = (_LightColor0 * (atten * max (0.0, dot (normalDir, lightDir)))) + (rimAtten * (1 / max (0.0, dot (normalDir, lightDir)))) + UNITY_LIGHTMODEL_AMBIENT.xyz;
+				float3 diffuseLight = diffuseAtten * dot (normalDir, lightDir);
+				float3 rimLight = rimAtten * (1.0 / dot (normalDir, viewDir));
+				float3 light = (_LightColor0 * diffuseLight) + rimLight + UNITY_LIGHTMODEL_AMBIENT.xyz;
+				
 				// vertex color based on height
 				float4 vertColor;
 				float vertMag = sqrt ((i.vert.x * i.vert.x) + (i.vert.y * i.vert.y) + (i.vert.z * i.vert.z));
@@ -52,12 +60,10 @@
 				} else {
 					vertColor = _Color_DeepSand;
 				}
-				// North & South Poles
-//				if (i.vert.y > 0.8 || i.vert.y < -0.8) {
-//					vertColor = _Color_Snow;
-//				}
-				o.col = float4 (lightFinal * vertColor, 1.0);
+				
+				o.col = float4 (light * vertColor, 1.0);
 				o.pos = mul (UNITY_MATRIX_MVP, i.vert);
+				
 				return o;
 			}
 			

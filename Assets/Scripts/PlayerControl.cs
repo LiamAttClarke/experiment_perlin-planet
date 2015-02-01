@@ -4,7 +4,7 @@ using System.Collections;
 namespace Universe {
 	public class PlayerControl : MonoBehaviour {
 
-		float mouseDeltaPosX, mouseDeltaPosY, timeMouseUp, initVelocityX, initVelocityY, velocityX, velocityY;
+		float zoom, mouseDeltaPosX, mouseDeltaPosY, timeMouseUp, initVelocityX, initVelocityY, velocityX, velocityY;
 		float terrainMult = 0.9975f;
 		float inputPrecision = 0.25f;
 		float inertiaDuration = 1.5f;
@@ -12,14 +12,19 @@ namespace Universe {
 		RaycastHit target;
 		bool isDragging, isReleased;
 		GameObject planet, terrain;
+		Mesh terrainMesh;
 		int layerMask9;
+        public float toolSize = 0.25f;
+        Touch touchZero, touchOne;
 
 		void Start () {
 			planet = GameObject.Find ("Planet");
 			terrain = GameObject.Find ("Terrain");
+			terrainMesh = terrain.GetComponent<MeshFilter> ().mesh;
 		}
 
 		void Update () {
+            // set tool
 			if (Input.GetKeyDown (KeyCode.Equals)) {
 				terrainMult = 1.0075f;
 			}
@@ -29,8 +34,32 @@ namespace Universe {
 			if (Input.GetMouseButton(1)) {
 				RaiseLand ();
 			}
+            float minFOV = 13.5f;
+            float maxFOV = 20f;
+
+            // scroll zoom
+            //zoom  = Mathf.Clamp(camera.fieldOfView + Input.GetAxis("Mouse ScrollWheel"), minFOV, maxFOV);
+            //camera.fieldOfView = zoom;
+
+            // pinch zoom
+            if (Input.touchCount == 2) {
+                touchZero = Input.GetTouch(0);
+                touchOne = Input.GetTouch(1);
+
+                Vector2 prevTouchZeroPos = touchZero.position - touchZero.deltaPosition;
+                Vector2 prevTouchOnePos = touchOne.position - touchOne.deltaPosition;
+
+                float prevTouchMag = (prevTouchZeroPos - prevTouchOnePos).magnitude;
+                float touchMag = (touchZero.position - touchOne.position).magnitude;
+                float touchDeltaMag = prevTouchMag - touchMag;
+
+                camera.fieldOfView += touchDeltaMag;
+                Mathf.Clamp(camera.fieldOfView, minFOV, maxFOV);
+            }
+
+            // move planet
 			if (Input.GetMouseButtonDown(0)) {
-				if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out target) && target.collider.tag == "Planet") {
+				if (Physics.Raycast (camera.ScreenPointToRay (Input.mousePosition), out target) && target.collider.tag == "Planet") {
 					mouseLastPos = Input.mousePosition;
 					isDragging = true;
 					isReleased = false;
@@ -66,15 +95,19 @@ namespace Universe {
 		void RaiseLand () {
 			RaycastHit hitInfo;
 			layerMask9 = 1 << 9;
-			if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out hitInfo, 10.0f, layerMask9)) {
-				Vector3[] terrainVerts = terrain.GetComponent<MeshFilter> ().mesh.vertices;
+            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hitInfo, 10.0f, layerMask9))
+            {
+				Vector3[] terrainVerts = terrainMesh.vertices;
 				for (int i = 0; i < terrainVerts.Length; i++) {
 					Vector3 hitPoint = planet.transform.InverseTransformPoint (hitInfo.point);
-					if (Vector3.Distance (terrainVerts[i], hitPoint) < 0.25f) {
+					if (Vector3.Distance (terrainVerts[i], hitPoint) < toolSize) {
 						terrainVerts[i] *= terrainMult;
 					}
 				}
-				terrain.GetComponent<MeshFilter> ().mesh.vertices = terrainVerts;
+				terrainMesh.vertices = terrainVerts;
+				terrainMesh.RecalculateNormals ();
+				terrainMesh.Optimize ();
+				terrain.GetComponent<MeshCollider> ().sharedMesh = terrainMesh;
 			}
 		}
 	}
