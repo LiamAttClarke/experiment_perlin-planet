@@ -16,13 +16,14 @@ namespace Universe {
 		int layerMask9;
         public float toolSize = 0.25f;
         Touch touchZero, touchOne;
-
+        float zoomSensitivity = 0.015f;
+        // initialize
 		void Start () {
 			planet = GameObject.Find ("Planet");
 			terrain = GameObject.Find ("Terrain");
 			terrainMesh = terrain.GetComponent<MeshFilter> ().mesh;
 		}
-
+        // update 
 		void Update () {
             // set tool
 			if (Input.GetKeyDown (KeyCode.Equals)) {
@@ -37,25 +38,24 @@ namespace Universe {
             float minFOV = 13.5f;
             float maxFOV = 20f;
 
-            // scroll zoom
-            //zoom  = Mathf.Clamp(camera.fieldOfView + Input.GetAxis("Mouse ScrollWheel"), minFOV, maxFOV);
-            //camera.fieldOfView = zoom;
+            // scroll zoom *****REMOVE FOR FINAL PRODUCT******
+            zoom  = Mathf.Clamp(camera.fieldOfView + -Input.GetAxis("Mouse ScrollWheel"), minFOV, maxFOV);
+            camera.fieldOfView = zoom;
 
             // pinch zoom
-            if (Input.touchCount == 2) {
-                touchZero = Input.GetTouch(0);
-                touchOne = Input.GetTouch(1);
+            //if (Input.touchCount == 2) {
+                //touchZero = Input.GetTouch(0);
+                //touchOne = Input.GetTouch(1);
 
-                Vector2 prevTouchZeroPos = touchZero.position - touchZero.deltaPosition;
-                Vector2 prevTouchOnePos = touchOne.position - touchOne.deltaPosition;
+                //Vector2 prevTouchZeroPos = touchZero.position - touchZero.deltaPosition;
+                //Vector2 prevTouchOnePos = touchOne.position - touchOne.deltaPosition;
 
-                float prevTouchMag = (prevTouchZeroPos - prevTouchOnePos).magnitude;
-                float touchMag = (touchZero.position - touchOne.position).magnitude;
-                float touchDeltaMag = prevTouchMag - touchMag;
+                //float prevTouchMag = (prevTouchZeroPos - prevTouchOnePos).magnitude;
+                //float touchMag = (touchZero.position - touchOne.position).magnitude;
+                //float touchDeltaMag = prevTouchMag - touchMag;
 
-                camera.fieldOfView += touchDeltaMag;
-                Mathf.Clamp(camera.fieldOfView, minFOV, maxFOV);
-            }
+                //camera.fieldOfView = Mathf.Clamp (camera.fieldOfView + touchDeltaMag * zoomSensitivity, minFOV, maxFOV);
+            //}
 
             // move planet
 			if (Input.GetMouseButtonDown(0)) {
@@ -79,7 +79,7 @@ namespace Universe {
 			}
 			mouseLastPos = Input.mousePosition;
 		}
-		
+		// physics
 		void FixedUpdate () {
 			// Inertia
 			if (isReleased) {
@@ -92,6 +92,7 @@ namespace Universe {
 				isReleased = false;
 			}
 		}
+        // terraform
 		void RaiseLand () {
 			RaycastHit hitInfo;
 			layerMask9 = 1 << 9;
@@ -103,7 +104,7 @@ namespace Universe {
 					if (Vector3.Distance (terrainVerts[i], hitPoint) < toolSize) {
 						terrainVerts[i] *= terrainMult;
 					}
-				}
+                }
 				terrainMesh.vertices = terrainVerts;
 				terrainMesh.RecalculateNormals ();
 				terrainMesh.Optimize ();
@@ -112,3 +113,4 @@ namespace Universe {
 		}
 	}
 }
+
