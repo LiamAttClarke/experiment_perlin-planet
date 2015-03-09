@@ -39,27 +39,27 @@ namespace Universe {
             float maxFOV = 20f;
 
             // scroll zoom *****REMOVE FOR FINAL PRODUCT******
-            zoom  = Mathf.Clamp(camera.fieldOfView + -Input.GetAxis("Mouse ScrollWheel"), minFOV, maxFOV);
-            camera.fieldOfView = zoom;
+            zoom  = Mathf.Clamp(GetComponent<Camera>().fieldOfView + -Input.GetAxis("Mouse ScrollWheel"), minFOV, maxFOV);
+            GetComponent<Camera>().fieldOfView = zoom;
 
             // pinch zoom
-            //if (Input.touchCount == 2) {
-                //touchZero = Input.GetTouch(0);
-                //touchOne = Input.GetTouch(1);
+            if (Input.touchCount == 2) {
+                touchZero = Input.GetTouch(0);
+                touchOne = Input.GetTouch(1);
 
-                //Vector2 prevTouchZeroPos = touchZero.position - touchZero.deltaPosition;
-                //Vector2 prevTouchOnePos = touchOne.position - touchOne.deltaPosition;
+                Vector2 prevTouchZeroPos = touchZero.position - touchZero.deltaPosition;
+                Vector2 prevTouchOnePos = touchOne.position - touchOne.deltaPosition;
 
-                //float prevTouchMag = (prevTouchZeroPos - prevTouchOnePos).magnitude;
-                //float touchMag = (touchZero.position - touchOne.position).magnitude;
-                //float touchDeltaMag = prevTouchMag - touchMag;
+                float prevTouchMag = (prevTouchZeroPos - prevTouchOnePos).magnitude;
+                float touchMag = (touchZero.position - touchOne.position).magnitude;
+                float touchDeltaMag = prevTouchMag - touchMag;
 
-                //camera.fieldOfView = Mathf.Clamp (camera.fieldOfView + touchDeltaMag * zoomSensitivity, minFOV, maxFOV);
-            //}
+                GetComponent<Camera>().fieldOfView = Mathf.Clamp (GetComponent<Camera>().fieldOfView + touchDeltaMag * zoomSensitivity, minFOV, maxFOV);
+            }
 
             // move planet
 			if (Input.GetMouseButtonDown(0)) {
-				if (Physics.Raycast (camera.ScreenPointToRay (Input.mousePosition), out target) && target.collider.tag == "Planet") {
+				if (Physics.Raycast (GetComponent<Camera>().ScreenPointToRay (Input.mousePosition), out target) && target.collider.tag == "Planet") {
 					mouseLastPos = Input.mousePosition;
 					isDragging = true;
 					isReleased = false;
@@ -96,7 +96,7 @@ namespace Universe {
 		void RaiseLand () {
 			RaycastHit hitInfo;
 			layerMask9 = 1 << 9;
-            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hitInfo, 10.0f, layerMask9))
+            if (Physics.Raycast(GetComponent<Camera>().ScreenPointToRay(Input.mousePosition), out hitInfo, 10.0f, layerMask9))
             {
 				Vector3[] terrainVerts = terrainMesh.vertices;
 				for (int i = 0; i < terrainVerts.Length; i++) {

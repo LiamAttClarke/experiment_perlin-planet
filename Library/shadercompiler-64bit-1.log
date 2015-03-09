@@ -1,0 +1,269 @@
+Base path: C:/Program Files/Unity/Editor/Data
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-42844
+Cmd: getPlatforms
+Cmd: preprocess
+  insize=2371 outsize=640 ok=1
+Cmd: compileSnippet
+  error: 2 plat 4 at (50): syntax error: unexpected token ';'\nCompiling Vertex program
+  error: 2 plat 4 at (52): syntax error: unexpected token '{'\nCompiling Vertex program
+  error: 2 plat 4 at (58): unrecognized identifier 'c'\nCompiling Vertex program
+  api=4 type=0 insize=2030 outsize=0 kw= ok=0
+Cmd: preprocess
+  insize=2372 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2031 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2031 outsize=1298 kw= ok=1
+Cmd: preprocess
+  insize=2352 outsize=640 ok=1
+Cmd: compileSnippet
+  error: 2 plat 4 at (48): unrecognized identifier 'If'\nCompiling Vertex program
+  error: 2 plat 4 at (48): unrecognized identifier 'the'\nCompiling Vertex program
+  api=4 type=0 insize=2011 outsize=0 kw= ok=0
+Cmd: preprocess
+  insize=2350 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2009 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2009 outsize=1453 kw= ok=1
+Cmd: preprocess
+  insize=2322 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1981 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1981 outsize=1347 kw= ok=1
+Cmd: preprocess
+  insize=2296 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1955 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1955 outsize=1347 kw= ok=1
+Cmd: preprocess
+  insize=2296 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1955 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1955 outsize=1193 kw= ok=1
+Cmd: preprocess
+  insize=2323 outsize=640 ok=1
+Cmd: compileSnippet
+  error: 2 plat 4 at (49): syntax error: unexpected token ';'\nCompiling Vertex program
+  error: 2 plat 4 at (51): syntax error: unexpected token '{'\nCompiling Vertex program
+  error: 2 plat 4 at (57): unrecognized identifier 'c'\nCompiling Vertex program
+  api=4 type=0 insize=1982 outsize=0 kw= ok=0
+Cmd: preprocess
+  insize=2324 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1983 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1983 outsize=1298 kw= ok=1
+Cmd: preprocess
+  insize=2331 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1990 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1990 outsize=1396 kw= ok=1
+Cmd: preprocess
+  insize=2335 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1994 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1994 outsize=1477 kw= ok=1
+Cmd: preprocess
+  insize=2331 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1990 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1990 outsize=1396 kw= ok=1
+Cmd: preprocess
+  insize=2408 outsize=640 ok=1
+Cmd: compileSnippet
+  error: 2 plat 4 at (52): syntax error: unexpected token 'if'\nCompiling Vertex program
+  error: 2 plat 4 at (58): unrecognized identifier 'c'\nCompiling Vertex program
+  api=4 type=0 insize=2067 outsize=0 kw= ok=0
+Cmd: preprocess
+  insize=2409 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2068 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2068 outsize=1396 kw= ok=1
+Cmd: preprocess
+  insize=2394 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2053 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2053 outsize=1339 kw= ok=1
+Cmd: preprocess
+  insize=2404 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2063 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2063 outsize=1339 kw= ok=1
+Cmd: preprocess
+  insize=2563 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2115 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2115 outsize=1339 kw= ok=1
+Cmd: preprocess
+  insize=2512 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2064 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2064 outsize=1469 kw= ok=1
+Cmd: preprocess
+  insize=2516 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2068 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2068 outsize=1469 kw= ok=1
+Cmd: preprocess
+  insize=2519 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2071 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2071 outsize=1534 kw= ok=1
+Cmd: preprocess
+  insize=2520 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2072 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2072 outsize=1534 kw= ok=1
+Cmd: preprocess
+  insize=2512 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2064 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2064 outsize=1469 kw= ok=1
+Cmd: preprocess
+  insize=2519 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2071 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2071 outsize=1485 kw= ok=1
+Cmd: preprocess
+  insize=2518 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2070 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2070 outsize=1485 kw= ok=1
+Cmd: preprocess
+  insize=2504 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2056 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2056 outsize=1298 kw= ok=1
+Cmd: preprocess
+  insize=2506 outsize=745 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2058 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2058 outsize=1298 kw= ok=1
+Cmd: preprocess
+  insize=2508 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2060 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2060 outsize=1298 kw= ok=1
+Cmd: preprocess
+  insize=2485 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2037 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2037 outsize=1298 kw= ok=1
+Cmd: preprocess
+  insize=2508 outsize=745 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2060 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2060 outsize=1502 kw= ok=1
+Cmd: preprocess
+  insize=2494 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2046 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2046 outsize=1477 kw= ok=1
+Cmd: preprocess
+  insize=2494 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2046 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2046 outsize=1437 kw= ok=1
+Cmd: preprocess
+  insize=2504 outsize=746 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2056 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2056 outsize=1396 kw= ok=1
+Cmd: preprocess
+  insize=2506 outsize=746 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2058 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2058 outsize=1347 kw= ok=1
+Cmd: preprocess
+  insize=2499 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2051 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2051 outsize=1363 kw= ok=1
+Cmd: preprocess
+  insize=2499 outsize=746 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2051 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2051 outsize=1339 kw= ok=1
+Cmd: preprocess
+  insize=2433 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1985 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1985 outsize=1298 kw= ok=1
+Cmd: preprocess
+  insize=2433 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1985 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1985 outsize=1193 kw= ok=1
+Cmd: preprocess
+  insize=2513 outsize=747 ok=1
+Cmd: compileSnippet
+  error: 2 plat 4 at (54): undeclared identifier '_RegularColor'\nCompiling Vertex program
+  api=4 type=0 insize=2065 outsize=0 kw= ok=0
+Cmd: preprocess
+  insize=2512 outsize=747 ok=1
+Cmd: compileSnippet
+  error: 2 plat 4 at (54): undeclared identifier '_RegularColor'\nCompiling Vertex program
+  api=4 type=0 insize=2064 outsize=0 kw= ok=0
+Cmd: preprocess
+  insize=2505 outsize=747 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2057 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2057 outsize=1347 kw= ok=1
+Cmd: preprocess
+  insize=2347 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2006 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2006 outsize=1347 kw= ok=1
+Cmd: preprocess
+  insize=2382 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2041 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2041 outsize=1453 kw= ok=1
+Cmd: preprocess
+  insize=2383 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2042 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2042 outsize=1453 kw= ok=1
+Cmd: preprocess
+  insize=2382 outsize=640 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2041 outsize=1307 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2041 outsize=1453 kw= ok=1
+Cmd: preprocess
+  insize=2383 outsize=640 ok=1

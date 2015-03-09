@@ -1,56 +1,69 @@
 ﻿Shader "Custom/Ocean" {
-	Properties {
-		_Color ("White", Color) = (1.0, 1.0, 1.0, 1.0)
-	}
-	SubShader {
-		Tags { "LightMode" = "ForwardBase" "Queue"="Transparent" }
-		Pass {
-        	Blend SrcAlpha OneMinusSrcAlpha // use alpha blending
-			CGPROGRAM
-			// Pragmas
-			#pragma vertex vert
-			#pragma fragment frag
-			
-			// User defined variables
-			uniform float4 _Color;
-			
-			// Unity defined variables
-			uniform float4 _LightColor0;
-			
-			// Base input structs
-			struct vertexIn {
-				float4 vert : POSITION;
-				float4 norm : NORMAL;
-			};
-			struct vertexOut {
-				float4 pos : SV_POSITION;
-				float4 col : COLOR;
-			};
-			
-			// Vertex function
-			vertexOut vert (vertexIn i) {
-				vertexOut o;
-				float3 normalDir = normalize (mul (i.norm, _World2Object).xyz);
-				float3 lightDir = normalize (_WorldSpaceLightPos0.xyz);
-				float3 viewDir = normalize (_WorldSpaceCameraPos.xyz - i.vert.xyz);				
-				float diffuseAtten = 0.5;
-				float rimAtten = 5.0;
-				float diffuseLight = diffuseAtten * dot (normalDir, lightDir);
-				
-				float rimLight = -rimAtten * (dot (normalDir, viewDir)) + 5.5;
-				
-				float3 lightFinal = (_LightColor0 * diffuseLight) + UNITY_LIGHTMODEL_AMBIENT.xyz;
-				o.col = float4 (lightFinal * _Color, rimLight);
-				o.pos = mul (UNITY_MATRIX_MVP, i.vert);
-				return o;
-			}
-			
-			// Fragment funcion
-			float4 frag (vertexOut o) : COLOR {
-				return o.col;
-			}
-			ENDCG
-		}
-	} 
-	//FallBack "Diffuse"
+    Properties {
+        _Color("Main Color", Color) = (1, 1, 1, .5) //Color when not intersecting
+        _HighlightColor("Highlight Color", Color) = (1, 1, 1, .5) //Color when intersecting
+        _HighlightThresholdMax("Highlight Threshold Max", Float) = 1 //Max difference for intersections
+    }
+    SubShader {
+        Tags { "Queue" = "Transparent" "RenderType"="Transparent"  }
+        Pass {
+            Blend SrcAlpha OneMinusSrcAlpha
+            ZWrite Off
+            Cull Off
+ 
+            CGPROGRAM
+            #pragma target 3.0
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
+ 
+            uniform sampler2D _CameraDepthTexture; //Depth Texture
+            uniform float4 _Color;
+            uniform float4 _HighlightColor;
+            uniform float _HighlightThresholdMax;
+ 
+            struct v2f {
+                float4 pos : SV_POSITION;
+                float4 projPos : TEXCOORD1; //Screen position of pos
+            };
+ 
+            v2f vert(appdata_base v) {
+                v2f o;
+                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+                o.projPos = ComputeScreenPos(o.pos);
+ 
+                return o;
+            }
+ 
+            half4 frag(v2f i) : COLOR {
+                float4 finalColor = _Color;
+ 
+                //Get the distance to the camera from the depth buffer for this point
+                float sceneZ = LinearEyeDepth (tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)).r);
+ 
+                //Actual distance to the camera
+                float partZ = i.projPos.z;
+ 
+                //If the two are similar, then there is an object intersecting with our object
+                //float diff = (abs(sceneZ - partZ)) / (_HighlightThresholdMax * clamp(_SinTime.w, 0, 1.0));
+                float diff = (abs(sceneZ - partZ)) / _HighlightThresholdMax;
+                if (diff < 0.25) {
+                	finalColor = _HighlightColor;
+                } else if(diff < 1) {
+                    finalColor = lerp(_HighlightColor, _Color, diff);
+                }
+ 
+                half4 c;
+                c.r = finalColor.r;
+                c.g = finalColor.g;
+                c.b = finalColor.b;
+                c.a = finalColor.a;
+ 
+                return c;
+            }
+ 
+            ENDCG
+        }
+    }
+    FallBack "Diffuse"
 }

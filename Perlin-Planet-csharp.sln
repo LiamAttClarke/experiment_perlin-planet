@@ -1,7 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{49F9CD49-D5AE-B5C1-798E-F5C431363055}") = "Perlin-Planet", "Assembly-CSharp-vs.csproj", "{0BD3DBDC-F00E-CF46-6C0E-815395C11462}"
+Project("{2AABA58B-5E1F-7894-999F-1906F781F420}") = "perlin-planet", "Assembly-CSharp-vs.csproj", "{F8B4187A-4255-20C0-7539-589F0CA418EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,15 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0BD3DBDC-F00E-CF46-6C0E-815395C11462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BD3DBDC-F00E-CF46-6C0E-815395C11462}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0BD3DBDC-F00E-CF46-6C0E-815395C11462}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0BD3DBDC-F00E-CF46-6C0E-815395C11462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8B4187A-4255-20C0-7539-589F0CA418EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8B4187A-4255-20C0-7539-589F0CA418EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8B4187A-4255-20C0-7539-589F0CA418EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8B4187A-4255-20C0-7539-589F0CA418EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																																																																																																																																	GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																																																																																																																																																	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
