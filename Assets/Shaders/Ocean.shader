@@ -2,7 +2,7 @@
     Properties {
         _Color("Main Color", Color) = (1, 1, 1, .5) //Color when not intersecting
         _HighlightColor("Highlight Color", Color) = (1, 1, 1, .5) //Color when intersecting
-        _HighlightThresholdMax("Highlight Threshold Max", Float) = 1 //Max difference for intersections
+        _HighlightThreshold("Highlight Threshold", Float) = 1 // Difference for intersections
     }
     SubShader {
         Tags { "Queue" = "Transparent" "RenderType"="Transparent"  }
@@ -20,7 +20,7 @@
             uniform sampler2D _CameraDepthTexture; //Depth Texture
             uniform float4 _Color;
             uniform float4 _HighlightColor;
-            uniform float _HighlightThresholdMax;
+            uniform float _HighlightThreshold;
  
             struct v2f {
                 float4 pos : SV_POSITION;
@@ -45,12 +45,12 @@
                 float partZ = i.projPos.z;
  
                 //If the two are similar, then there is an object intersecting with our object
-                //float diff = (abs(sceneZ - partZ)) / (_HighlightThresholdMax * clamp(_SinTime.w, 0, 1.0));
-                float diff = (abs(sceneZ - partZ)) / _HighlightThresholdMax;
-                if (diff < 0.25) {
+                //float diff = (abs(sceneZ - partZ)) / (_HighlightThreshold * clamp(_SinTime.w, 0, 1.0));
+                float diff = (abs(sceneZ - partZ)) / _HighlightThreshold;
+                if (diff < 0.2) {
                 	finalColor = _HighlightColor;
-                } else if(diff < 1) {
-                    finalColor = lerp(_HighlightColor, _Color, diff);
+                } else if(diff < 0.3) {
+                    finalColor = lerp(_HighlightColor, _Color, 0.5);
                 }
  
                 half4 c;

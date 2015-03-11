@@ -1,10 +1,12 @@
 ﻿Shader "Custom/Terrain" {
 	Properties {
-		_Color_Rock ("Rock Color", Color) = (1.0, 1.0, 1.0, 1.0)
+		_MainTex ("Texture", 2D) = "white" {}
 		_Color_Sand ("Sand Color", Color) = (1.0, 1.0, 1.0, 1.0)
 		_Color_Grass ("Grass Color", Color) = (1.0, 1.0, 1.0, 1.0)
 		_Color_Snow ("Snow Color", Color) = (1.0, 1.0, 1.0, 1.0)
-		_MainTex ("Texture", 2D) = "white" {}
+		_RimColor ("Rim Color", Color) = (1.0, 1.0, 1.0, 1.0)
+		_DiffuseGain ("Diffuse Gain", Range(0, 2.0)) = 1.5
+      	_RimGain ("Rim Gain", Range(0.5, 5.0)) = 4.0
 	}
 	SubShader {
 		Pass {
@@ -19,13 +21,19 @@
 			#include "UnityCG.cginc"
 			
 			// User defined variables
-			uniform float4 _Color_Rock;
+			// Color
 			uniform float4 _Color_Sand;
 			uniform float4 _Color_Grass;
 			uniform float4 _Color_Snow;
 			
+			// Texture
 			uniform sampler2D _MainTex;
 			uniform float4 _MainTex_ST;
+			
+			// Lighting
+			uniform float _DiffuseGain;
+			uniform float4 _RimColor;
+			uniform float _RimGain;
 			
 			// Unity defined variables
 			uniform float4 _LightColor0;
@@ -42,33 +50,35 @@
 				half2 uv : TEXCOORD0;
 			};
 			
+			
 			// Vertex function
 			fragmentIn vert (vertexIn i) {
 				fragmentIn o;
-				
+
 				// vectors
 				float3 normalDir = normalize (mul (i.normal, _World2Object).xyz);
 				float3 lightDir = normalize (_WorldSpaceLightPos0.xyz);
 				float3 viewDir = normalize (_WorldSpaceCameraPos.xyz);
 				
 				// lighting
-				float diffuseAtten = 2.0;
-				float rimAtten = 0.3;
-				float3 diffuseLight = diffuseAtten * dot (normalDir, lightDir);
-				float3 rimLight = rimAtten * (1.0 / dot (normalDir, viewDir));
-				float3 light = (_LightColor0 * diffuseLight) + rimLight + UNITY_LIGHTMODEL_AMBIENT.xyz;
+				// diffuse
+				float3 diffuseLight = _DiffuseGain * dot (normalDir, lightDir);
+				// rim
+				float rimPower = 3.0;
+				half rim = 1.0 - clamp(dot(viewDir, normalDir), 0, 1.0);
+				float3 rimLight = _RimGain *_RimColor.rgb * pow(rim, rimPower);
+				//final
+				float3 light = diffuseLight + rimLight;
 				
-				// vertex color based on height
+				// vertex color based on altitude
 				float4 vertColor;
 				float vertMag = sqrt ((i.vertex.x * i.vertex.x) + (i.vertex.y * i.vertex.y) + (i.vertex.z * i.vertex.z));
 				if (vertMag > 1.15) {
 				vertColor = _Color_Snow;
 				} else if (vertMag >= 0.97) {
 					vertColor = _Color_Grass;
-				} else if (vertMag > 0.86) {
-				 	vertColor = _Color_Sand;
 				} else {
-					vertColor = _Color_Rock;
+				 	vertColor = _Color_Sand;
 				}
 				
 				o.col = float4 (light * vertColor, 1.0);
