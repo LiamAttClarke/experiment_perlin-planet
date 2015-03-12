@@ -13,19 +13,6 @@ namespace Universe {
 		void Start () {
 			planet = GameObject.Find("Planet");
 			transform.LookAt (transform.position * 2);
-			int seed = Random.Range (0, 100);
-			PerlinNoise cloudNoise = new PerlinNoise(seed);
-			Mesh cloudMesh = gameObject.GetComponent<MeshFilter> ().mesh;
-			Vector3[] cloudVerts = cloudMesh.vertices;
-			float spread = 0.1f;
-			float amplitude = 0.5f;
-			for (int i = 0; i < cloudVerts.Length; i++) {
-				float cloudMap = amplitude * (float)cloudNoise.Noise ((double)cloudVerts[i].x / spread, (double)cloudVerts[i].y / spread, (double)cloudVerts[i].z / spread) + 1.0f;
-				cloudVerts[i] *= cloudMap;
-			}
-			cloudMesh.vertices = cloudVerts;
-			cloudMesh.RecalculateNormals ();
-			cloudMesh.Optimize ();
 		}
 		
 		void Update () {

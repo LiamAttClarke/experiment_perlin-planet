@@ -48,11 +48,12 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Cloud.cs" />
      <Compile Include="Assets\Scripts\EnableDepthBuffer.cs" />
+     <Compile Include="Assets\Scripts\Land.cs" />
      <Compile Include="Assets\Scripts\Ocean.cs" />
      <Compile Include="Assets\Scripts\PerlinNoise.cs" />
      <Compile Include="Assets\Scripts\Plant.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
-     <Compile Include="Assets\Scripts\Terrain.cs" />
+     <Compile Include="Assets\Scripts\Topper.cs" />
      <None Include="Assets\Shaders\Cloud.shader" />
      <None Include="Assets\Shaders\Ocean.shader" />
      <None Include="Assets\Shaders\Terrain.shader" />
