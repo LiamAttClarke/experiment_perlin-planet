@@ -15,10 +15,10 @@ public class Topper : MonoBehaviour {
 	
 	void Plot (GameObject obj, int objCount, float r) {
 		for (int i = 0; i < objCount; i++) {
-			longitude = Random.Range (0, Mathf.PI * 2);
+			longitude = Mathf.Round(Random.Range (0, Mathf.PI * 2) * 10) / 10;
 			//latitude = Random.Range (0, Mathf.PI);
-			float abc = Random.Range (0,1f);
-			latitude = Mathf.Acos (2 * abc - 1);
+			float rand = Random.Range (0,1f);
+			latitude = Mathf.Round (Mathf.Acos (2 * rand - 1) * 10) / 10;
 			x = r * Mathf.Sin (latitude) * Mathf.Cos (longitude);
 			y = r * Mathf.Sin (latitude) * Mathf.Sin (longitude);
 			z = r * Mathf.Cos (latitude);

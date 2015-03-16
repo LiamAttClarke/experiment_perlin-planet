@@ -4,10 +4,13 @@
 		_RimColor ("Rim Color", Color) = (1.0, 1.0, 1.0, 1.0)
 		_DiffuseGain ("Diffuse Gain", Range(0, 2.0)) = 1.5
       	_RimGain ("Rim Gain", Range(0.5, 5.0)) = 4.0
+      	_OverHang ("Overhang", Range(0, 2.0)) = 1.0
 	}
 	SubShader {
-		Pass {
-			Tags { "Queue" = "Geometry" "LightMode" = "ForwardBase" }
+		Tags { "Queue" = "Transparent" "RenderType"="Transparent" "LightMode" = "ForwardBase" }
+        Pass {
+            Blend SrcAlpha OneMinusSrcAlpha
+            ZWrite Off
 
 			CGPROGRAM
 			// Pragmas
@@ -19,17 +22,15 @@
 			// Color
 			uniform float4 _Color;
 			uniform float4 _RimColor;
+			uniform float _OverHang;
 			// Lighting
 			uniform float _DiffuseGain;
 			uniform float _RimGain;
 			
-			// Unity defined variables
-			uniform float4 _LightColor0;
-			
 			// Base input structs
 			struct vertexIn {
 				float4 vertex : POSITION;
-				float4 normal : NORMAL;
+				float3 normal : NORMAL;
 			};
 			struct fragmentIn {
 				float4 pos : SV_POSITION;
@@ -56,14 +57,16 @@
 				//final
 				float3 light = diffuseLight + rimLight;
 				
-				o.col = float4 (light * _Color, 1.0);
+				// Transparency
+				half alpha = clamp(dot(i.vertex, -viewDir) + _OverHang, 0, 0.75);
+				o.col = float4 (light * _Color, alpha);
 				o.pos = mul (UNITY_MATRIX_MVP, i.vertex);
 				
 				return o;
 			}
 			
 			// Fragment funcion
-			float4 frag (fragmentIn o) : COLOR {
+			half4 frag (fragmentIn o) : COLOR {
 				return o.col;
 			}
 			ENDCG

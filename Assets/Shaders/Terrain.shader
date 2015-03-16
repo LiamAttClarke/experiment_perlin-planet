@@ -35,13 +35,10 @@
 			uniform float4 _RimColor;
 			uniform float _RimGain;
 			
-			// Unity defined variables
-			uniform float4 _LightColor0;
-			
 			// Base input structs
 			struct vertexIn {
 				float4 vertex : POSITION;
-				float4 normal : NORMAL;
+				float3 normal : NORMAL;
 				float4 texcoord : TEXCOORD0;
 			};
 			struct fragmentIn {
@@ -89,7 +86,7 @@
 			}
 			
 			// Fragment funcion
-			float4 frag (fragmentIn o) : COLOR {
+			half4 frag (fragmentIn o) : COLOR {
 				return tex2D(_MainTex, o.uv) * o.col;
 			}
 			ENDCG

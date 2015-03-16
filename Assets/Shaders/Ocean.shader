@@ -5,11 +5,11 @@
         _HighlightThreshold("Highlight Threshold", Float) = 1 // Difference for intersections
     }
     SubShader {
-        Tags { "Queue" = "Transparent" "RenderType"="Transparent"  }
+        Tags { "Queue" = "Transparent" "RenderType"="Transparent" "LightMode" = "ForwardBase" }
         Pass {
             Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
-            Cull Off
+            Cull Back
  
             CGPROGRAM
             #pragma target 3.0
@@ -29,7 +29,7 @@
  
             v2f vert(appdata_base v) {
                 v2f o;
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);           
                 o.projPos = ComputeScreenPos(o.pos);
  
                 return o;
@@ -53,11 +53,7 @@
                     finalColor = lerp(_HighlightColor, _Color, 0.5);
                 }
  
-                half4 c;
-                c.r = finalColor.r;
-                c.g = finalColor.g;
-                c.b = finalColor.b;
-                c.a = finalColor.a;
+                half4 c = finalColor;
  
                 return c;
             }
