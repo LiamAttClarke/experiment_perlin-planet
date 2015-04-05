@@ -1,7 +1,7 @@
 ﻿Shader "Custom/Ocean" {
     Properties {
-        _Color("Main Color", Color) = (1, 1, 1, .5) //Color when not intersecting
-        _HighlightColor("Highlight Color", Color) = (1, 1, 1, .5) //Color when intersecting
+        _Color("Main Color", Color) = (1, 1, 1, 1) //Color when not intersecting
+        _HighlightColor("Highlight Color", Color) = (1, 1, 1, 1) //Color when intersecting
         _HighlightThreshold("Highlight Threshold", Float) = 1 // Difference for intersections
     }
     SubShader {
@@ -18,12 +18,13 @@
             #include "UnityCG.cginc"
  
             uniform sampler2D _CameraDepthTexture; //Depth Texture
-            uniform float4 _Color;
-            uniform float4 _HighlightColor;
+            uniform half3 _Color;
+            uniform half3 _HighlightColor;
             uniform float _HighlightThreshold;
  
             struct v2f {
                 float4 pos : SV_POSITION;
+                float4 norm : NORMAL;
                 float4 projPos : TEXCOORD1; //Screen position of pos
             };
  
@@ -36,8 +37,8 @@
             }
  
             half4 frag(v2f i) : COLOR {
-                float4 finalColor = _Color;
- 
+            	half4 finalColor = half4(_Color, 0.5);
+                
                 //Get the distance to the camera from the depth buffer for this point
                 float sceneZ = LinearEyeDepth (tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)).r);
  
@@ -48,9 +49,9 @@
                 //float diff = (abs(sceneZ - partZ)) / (_HighlightThreshold * clamp(_SinTime.w, 0, 1.0));
                 float diff = (abs(sceneZ - partZ)) / _HighlightThreshold;
                 if (diff < 0.2) {
-                	finalColor = _HighlightColor;
+                	finalColor = half4(_HighlightColor,0.9);
                 } else if(diff < 0.3) {
-                    finalColor = lerp(_HighlightColor, _Color, 0.5);
+                    finalColor = half4(lerp(_HighlightColor, _Color, 0.33), 0.9);
                 }
  
                 half4 c = finalColor;

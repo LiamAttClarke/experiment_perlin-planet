@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Ocean.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="C:\Users\Liam\Desktop\RevealShader\Assets\Reveal.shader">
     <Files>
-      <File FileName="Assets\Scripts\Ocean.cs" Line="23" Column="6" />
+      <File FileName="C:\Users\Liam\Desktop\RevealShader\Assets\Reveal.shader" Line="34" Column="17" />
+      <File FileName="Assets\Shaders\Terrain.shader" Line="70" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
