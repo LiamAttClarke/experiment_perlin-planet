@@ -6,7 +6,6 @@ namespace Universe {
 
 		// Use this for initialization
 		void Start () {
-			GameObject planet = GameObject.Find("Planet");
 			transform.LookAt (transform.position * 2);
 		}
 	}

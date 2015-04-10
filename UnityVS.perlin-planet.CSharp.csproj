@@ -64,7 +64,6 @@
     <Compile Include="Assets\Scripts\Topper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\$GS Billboard.shader" />
     <None Include="Assets\Shaders\Atmosphere.shader" />
     <None Include="Assets\Shaders\Cloud.shader" />
     <None Include="Assets\Shaders\Ocean.shader" />
