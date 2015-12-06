@@ -1,73 +1,76 @@
 Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-19856
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-2848
 Cmd: getPlatforms
 Cmd: preprocess
-  insize=3395 outsize=808 ok=1
+  insize=1947 outsize=605 ok=1
 Cmd: compileSnippet
-  error: 1 plat 4 at (58): 'mul': implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (72): implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (73): implicit truncation of vector type\nCompiling Vertex program
-  error: 2 plat 4 at (81): unrecognized identifier 'GS_INPUT'\nCompiling Vertex program
-  api=4 type=0 insize=2888 outsize=0 kw= ok=0
+  api=4 type=0 insize=1641 outsize=2411 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1641 outsize=1128 kw= pd= ok=1
 Cmd: preprocess
-  insize=3442 outsize=823 ok=1
+  insize=2418 outsize=673 ok=1
 Cmd: compileSnippet
-  error: 1 plat 4 at (59): 'mul': implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (73): implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (74): implicit truncation of vector type\nCompiling Vertex program
-  error: 2 plat 4 at (82): unrecognized identifier 'GS_INPUT'\nCompiling Vertex program
-  api=4 type=0 insize=2935 outsize=0 kw= ok=0
-Cmd: preprocess
-  insize=3436 outsize=823 ok=1
+  error: 1 plat 4 at (31): Output value 'vert' is not completely initialized\nCompiling Vertex program
+  api=4 type=0 insize=2044 outsize=1379 kw= pd= ok=1
 Cmd: compileSnippet
-  error: 2 plat 4 at (56): unrecognized identifier 'fragmentIn'\nCompiling Vertex program
-  error: 2 plat 4 at (56): unrecognized identifier 'o'\nCompiling Vertex program
-  api=4 type=0 insize=2929 outsize=0 kw= ok=0
-Cmd: preprocess
-  insize=3433 outsize=823 ok=1
-Cmd: compileSnippet
-  error: 1 plat 4 at (59): 'mul': implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (73): implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (74): implicit truncation of vector type\nCompiling Vertex program
-  error: 2 plat 4 at (82): unrecognized identifier 'GS_INPUT'\nCompiling Vertex program
-  api=4 type=0 insize=2926 outsize=0 kw= ok=0
-Cmd: preprocess
-  insize=3545 outsize=824 ok=1
-Cmd: compileSnippet
-  api=4 type=0 insize=3038 outsize=2631 kw= ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=3038 outsize=2152 kw= ok=1
-Cmd: compileSnippet
-  error: 2 plat 4 at (0): Program 'GS_Main', error X4572: geometry shader didn't emit anything\nCompiling Geometry program
-  error: 1 plat 4 at (64): 'mul': implicit truncation of vector type\nCompiling Geometry program
-  error: 1 plat 4 at (78): implicit truncation of vector type\nCompiling Geometry program
-  error: 1 plat 4 at (79): implicit truncation of vector type\nCompiling Geometry program
-  api=4 type=4 insize=3038 outsize=0 kw= ok=0
-Cmd: preprocess
-  insize=3567 outsize=824 ok=1
-Cmd: compileSnippet
-  error: 1 plat 4 at (64): 'mul': implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (78): implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (79): implicit truncation of vector type\nCompiling Vertex program
-  error: 2 plat 4 at (88): 'Append': no matching 1 parameter intrinsic method; Possible intrinsic methods are: TriangleStream<struct FS_INPUT>.Append(<unknown>)\nCompiling Vertex program
-  error: 2 plat 4 at (88): undeclared identifier 'pIn'\nCompiling Vertex program
-  api=4 type=0 insize=3060 outsize=0 kw= ok=0
-Cmd: preprocess
-  insize=3576 outsize=824 ok=1
-Cmd: compileSnippet
-  error: 1 plat 4 at (64): 'mul': implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (78): implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (79): implicit truncation of vector type\nCompiling Vertex program
-  error: 2 plat 4 at (88): 'Append': no matching 0 parameter intrinsic method; Possible intrinsic methods are: TriangleStream<struct FS_INPUT>.Append(<unknown>)\nCompiling Vertex program
-  error: 2 plat 4 at (88): syntax error: unexpected token '.'\nCompiling Vertex program
-  api=4 type=0 insize=3069 outsize=0 kw= ok=0
-Cmd: preprocess
-  insize=3564 outsize=824 ok=1
-Cmd: compileSnippet
-  error: 1 plat 4 at (64): 'mul': implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (78): implicit truncation of vector type\nCompiling Vertex program
-  error: 1 plat 4 at (79): implicit truncation of vector type\nCompiling Vertex program
-  error: 2 plat 4 at (83): cannot convert from 'struct FS_INPUT' to 'struct GS_INPUT'\nCompiling Vertex program
-  api=4 type=0 insize=3057 outsize=0 kw= ok=0
+  api=4 type=1 insize=2044 outsize=1753 kw= pd= ok=1
 Cmd: preprocess
   insize=3262 outsize=808 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2755 outsize=2647 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2755 outsize=2168 kw= pd= ok=1
+Cmd: preprocess
+  insize=1328 outsize=448 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1179 outsize=1721 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1179 outsize=518 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=751 outsize=3533 kw=SHADOWS_DEPTH pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=751 outsize=380 kw=SHADOWS_DEPTH pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=982 outsize=3979 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _DETAIL_MULX2 pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=982 outsize=11129 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _DETAIL_MULX2 pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=938 outsize=4101 kw=DIRECTIONAL SHADOWS_OFF _DETAIL_MULX2 pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=938 outsize=6027 kw=DIRECTIONAL SHADOWS_OFF _DETAIL_MULX2 pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=541 outsize=3533 kw=SHADOWS_DEPTH pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=541 outsize=453 kw=SHADOWS_DEPTH pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1333 outsize=1404 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1333 outsize=1168 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1329 outsize=1404 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1329 outsize=1168 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1329 outsize=1404 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1329 outsize=1168 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1333 outsize=1404 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1333 outsize=1168 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1321 outsize=1404 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1321 outsize=1168 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1331 outsize=1404 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1331 outsize=1168 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=982 outsize=3979 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=982 outsize=10618 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=938 outsize=4101 kw=DIRECTIONAL SHADOWS_OFF pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=938 outsize=5515 kw=DIRECTIONAL SHADOWS_OFF pd= ok=1
